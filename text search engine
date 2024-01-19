@@ -1,0 +1,26 @@
+class TextSearchEngine:
+    def _init_(self):
+        self.documents = {}
+
+    def add_document(self, doc_id, content):
+        self.documents[doc_id] = content.lower()
+
+    def search(self, query):
+        results = []
+        query = query.lower()
+        for doc_id, content in self.documents.items():
+            if query in content:
+                results.append(doc_id)
+        return results
+
+# Example usage:
+search_engine = TextSearchEngine()
+
+search_engine.add_document(1, "This is a sample document.")
+search_engine.add_document(2, "Another document for testing.")
+search_engine.add_document(3, "Python programming is fun.")
+
+query_to_search = "python"
+results = search_engine.search(query_to_search)
+
+print(f"Search results for '{query_to_search}': {results}")
