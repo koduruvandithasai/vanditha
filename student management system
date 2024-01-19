@@ -1,0 +1,49 @@
+class StudentManagementSystem:
+    def _init_(self):
+        self.students = {}
+
+    def add_student(self, student_id, name, grade):
+        if student_id not in self.students:
+            self.students[student_id] = {'name': name, 'grade': grade}
+            print(f"Student {name} added successfully.")
+        else:
+            print(f"Student with ID {student_id} already exists.")
+
+    def remove_student(self, student_id):
+        if student_id in self.students:
+            del self.students[student_id]
+            print(f"Student with ID {student_id} removed successfully.")
+        else:
+            print(f"Student with ID {student_id} not found.")
+
+    def get_student_info(self, student_id):
+        if student_id in self.students:
+            return self.students[student_id]
+        else:
+            return None
+
+    def display_all_students(self):
+        print("Student ID\tName\t\tGrade")
+        for student_id, info in self.students.items():
+            print(f"{student_id}\t\t{info['name']}\t\t{info['grade']}")
+
+# Example usage:
+sms = StudentManagementSystem()
+
+sms.add_student(1, 'John Doe', 'A')
+sms.add_student(2, 'Jane Smith', 'B')
+sms.add_student(3, 'Bob Johnson', 'C')
+
+sms.display_all_students()
+
+student_id_to_find = 2
+student_info = sms.get_student_info(student_id_to_find)
+if student_info:
+    print(f"\nInformation for Student ID {student_id_to_find}: {student_info}")
+else:
+    print(f"\nStudent with ID {student_id_to_find} not found.")
+
+sms.remove_student(1)
+
+print("\nAfter removal:")
+sms.display_all_students()
